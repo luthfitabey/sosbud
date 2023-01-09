@@ -15,4 +15,16 @@ class Surat extends Model
     {
         return $this->belongsTo(JenisSurat::class, 'id_jenis_surat', 'id_jenis_surat');
     }
+    public function getImage()
+    {
+        if (substr($this->image, 0, 5) == "https") {
+            return $this->image;
+        }
+
+        if ($this->image) {
+            return asset('/uploads/imgCover/' . $this->image);
+        }
+
+        return 'https://via.placeholder.com/500x500.png?text=No+Cover';
+    }
 }

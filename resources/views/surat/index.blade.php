@@ -64,7 +64,7 @@ css dan js yang membedakannya ada pada ajax server side di bagian push('javascri
                 lengthChange: false,
                 autoWidth: false,
                 
-                // Route untuk menampilkan data space
+                // Route untuk menampilkan data surat
                 ajax: '{{ route('data-surat') }}',
                 columns: [{
                         data: 'DT_RowIndex',
