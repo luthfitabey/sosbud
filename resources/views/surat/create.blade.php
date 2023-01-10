@@ -27,6 +27,16 @@
                         <form action="{{ route('surats.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group mb-3">
+                                <select  id="jenis-dropdown" class="form-control">
+                                <option value="">Pilih Jenis Surat</option>
+                                @foreach ($jenis_surat as $data)
+                                <option value="{{$data->id}}">
+                                    {{$data->name}}
+                                </option>
+                                 @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
                                 <label for="">Nomor Surat</label>
                                 <input type="text" name="nomor_surat" class="form-control @error('nomor') is-invalid @enderror" id="">
                                 @error('nomor')
