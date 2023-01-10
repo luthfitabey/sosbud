@@ -27,14 +27,17 @@
                         <form action="{{ route('surats.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group mb-3">
-                                <select  id="jenis-dropdown" class="form-control">
-                                <option value="">Pilih Jenis Surat</option>
-                                @foreach ($jenis_surat as $data)
-                                <option value="{{$data->id}}">
-                                    {{$data->name}}
-                                </option>
-                                 @endforeach
-                                </select>
+                            <select name="id_jenis_surat" class="form-control" style="width: 175px;">
+                                <option value="" disabled selected>- - - - Pilih Jenis Surat - - - -</option>
+                                @foreach($sesi as $s)
+                                <option value="{{ $s['jenis_surat'] }}">{{ $s['jenis_surat'] }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('id_jenis_surat'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('id_jenis_surat') }}</strong>
+                                </span>
+                            @endif
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Nomor Surat</label>

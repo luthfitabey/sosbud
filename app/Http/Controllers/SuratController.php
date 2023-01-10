@@ -71,11 +71,11 @@ class SuratController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_surat)
     {
-        //
+      $surat = Surat::findOrFail($id_surat);
+      return view('surat.show', compact('surat'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
