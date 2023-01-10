@@ -19,11 +19,6 @@
     </style>
 
 
-{{-- Pada view create.blade space ini kita kan menginput beberapa data yaitu 
-nama space (tempat), deskripsi, gambar jika di perlukan, dan titik koordinat lokasi
-Untuk cdn yang kita muat disini hampir sama dengan form create pada file view create centrepoint
---}}
-
 @section('content')
     <!-- <div class="container"> -->
         <div class="row">
