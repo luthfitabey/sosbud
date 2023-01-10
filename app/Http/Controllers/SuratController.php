@@ -48,7 +48,7 @@ class SuratController extends Controller
         if ($request->hasFile('image')){
             $file = $request->file('image');
             $uploadFile = time() . '_' . $file->getClientOriginalName();
-            $file->move('uploads/imgVocer/', $uploadFile);
+            $file->move('uploads/imgCover/', $uploadFile);
             $surat->image = $uploadFile;
         }
         $surat->nomor = $request->input('nomor_surat');
