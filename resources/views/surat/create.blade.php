@@ -3,7 +3,7 @@
 @section('title', 'Create Spaces')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Tambah Kawasan Tata Ruang</h1>
+    <h1 class="m-0 text-dark">Tambah Surat</h1>
 @stop
 
 @section('style-css')
@@ -29,27 +29,41 @@ Untuk cdn yang kita muat disini hampir sama dengan form create pada file view cr
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">Tambah Kawasan</div>
+                    <div class="card-header">Tambah Data Surat Masuk dan Keluar</div>
                     <div class="card-body">
                         {{-- action form yang mengarah ke route space.store untuk proses penyimpanan data --}}
-                        <form action="{{ route('space.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('surats.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group mb-3">
-                                <label for="">Nama Kawasan</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="">
-                                @error('name')
+                                <label for="">Nomor Surat</label>
+                                <input type="text" name="nomor_surat" class="form-control @error('nomor') is-invalid @enderror" id="">
+                                @error('nomor')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="">Alamat</label>
-                                <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" id="">
-                                @error('address')
+                                <label for="">Perihal</label>
+                                <input type="text" name="perihal" class="form-control @error('perihal') is-invalid @enderror" id="">
+                                @error('perihal')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="">Foto space</label><br>
+                                <label for="">tanggal</label>
+                                <input type="text" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" id="">
+                                @error('tanggal')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="">Tindak Lanjut</label>
+                                <input type="text" name="tl" class="form-control @error('tl') is-invalid @enderror" id="">
+                                @error('tl')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="">Keterangan</label><br>
                                 <img id="previewImage" class="mb-2" src="#" width="100%" alt="">
                                 <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
                                     id="image">
@@ -57,25 +71,6 @@ Untuk cdn yang kita muat disini hampir sama dengan form create pada file view cr
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            
-                            <div class="form-group mb-3">
-                                <label for="">Deskripsi</label>
-                                <textarea name="content" class="form-control @error('content')
-                                    is-invalid
-                                @enderror" id="" cols="30" rows="10" placeholder="Deskripsi"></textarea>
-                                @error('content')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="">Lokasi</label>
-                                <input type="text" name="location"
-                                    class="form-control @error('location') is-invalid @enderror" readonly id="">
-                                @error('location')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div id="map"></div>
                             <div class="form-group mt-3">
                                 <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                             </div>
@@ -110,73 +105,6 @@ Untuk cdn yang kita muat disini hampir sama dengan form create pada file view cr
         // Ketika tag input file denghan class image di klik akan menjalankan fungsi di atas
         $("#image").change(function() {
             readURL(this);
-        });
-        var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            mbUrl =
-            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-        var satellite = L.tileLayer(mbUrl, {
-                id: 'mapbox/satellite-v9',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            }),
-            dark = L.tileLayer(mbUrl, {
-                id: 'mapbox/dark-v10',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            }),
-            streets = L.tileLayer(mbUrl, {
-                id: 'mapbox/streets-v11',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            });
-        var map = L.map('map', {
-            // titik koordinat disini kita dapatkan dari tabel centrepoint tepatnya dari field location
-            // yang sebelumnya sudah kita tambahkan jadi lokasi map yang akan muncul  sesuai dengan tabel
-            // centrepoint
-            center: [{{ $centrepoint->location }}],
-            zoom: 14,
-            layers: [streets]
-        });
-        var baseLayers = {
-            //"Grayscale": grayscale,
-            "Streets": streets,
-            "Satellite": satellite
-        };
-        var overlays = {
-            "Streets": streets,
-            "Satellite": satellite,
-        };
-        L.control.layers(baseLayers, overlays).addTo(map);
-        // Begitu juga dengan curLocation titik koordinatnya dari tabel centrepoint
-        // lalu kita masukkan curLocation tersebut ke dalam variabel marker untuk menampilkan marker
-        // pada peta.
-        var curLocation = [{{ $centrepoint->location }}];
-        map.attributionControl.setPrefix(false);
-        var marker = new L.marker(curLocation, {
-            draggable: 'true',
-        });
-        map.addLayer(marker);
-        marker.on('dragend', function(event) {
-            var location = marker.getLatLng();
-            marker.setLatLng(location, {
-                draggable: 'true',
-            }).bindPopup(location).update();
-            $('#location').val(location.lat + "," + location.lng).keyup()
-        });
-        var loc = document.querySelector("[name=location]");
-        map.on("click", function(e) {
-            var lat = e.latlng.lat;
-            var lng = e.latlng.lng;
-            if (!marker) {
-                marker = L.marker(e.latlng).addTo(map);
-            } else {
-                marker.setLatLng(e.latlng);
-            }
-            loc.value = lat + "," + lng;
         });
     </script>
 @endpush
