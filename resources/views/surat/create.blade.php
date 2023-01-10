@@ -1,15 +1,12 @@
 @extends('adminlte::page')
 
-@section('title', 'Create Spaces')
+@section('title', 'Tambah Surat')
 
 @section('content_header')
     <h1 class="m-0 text-dark">Tambah Surat</h1>
 @stop
 
 @section('style-css')
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-        crossorigin="" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <style>
@@ -26,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">Tambah Data Surat Masuk dan Keluar</div>
                     <div class="card-body">
-                        {{-- action form yang mengarah ke route space.store untuk proses penyimpanan data --}}
+                        {{-- action form yang mengarah ke route surat.store untuk proses penyimpanan data --}}
                         <form action="{{ route('surats.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group mb-3">
