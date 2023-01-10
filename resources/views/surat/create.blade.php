@@ -9,12 +9,6 @@
 @section('style-css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    <style>
-        #map {
-            height: 500px;
-        }
-    </style>
-
 
 @section('content')
     <!-- <div class="container"> -->
@@ -29,8 +23,8 @@
                             <div class="form-group mb-3">
                             <select name="id_jenis_surat" class="form-control" style="width: 175px;">
                                 <option value="" disabled selected>- - - - Pilih Jenis Surat - - - -</option>
-                                @foreach($sesi as $s)
-                                <option value="{{ $s['jenis_surat'] }}">{{ $s['jenis_surat'] }}</option>
+                                @foreach($jenis as $j)
+                                <option value="{{ $s['jenis_surat'] }}">{{ $j['jenis_surat'] }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('id_jenis_surat'))

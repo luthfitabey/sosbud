@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Surat;
+use App\Models\JenisSurat;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -17,6 +18,7 @@ class SuratController extends Controller
      */
     public function index()
     {
+        $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
         return view('surat.index');
     }
 
@@ -28,6 +30,7 @@ class SuratController extends Controller
     public function create()
     {
         $surat = Surat::get()->first();
+        $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
         return view('surat.create', [
             'surat' => $surat,
         ]);
@@ -41,6 +44,7 @@ class SuratController extends Controller
      */
     public function store(Request $request)
     {
+        $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
         $this->validate($request, [
 
         ]);
@@ -74,6 +78,7 @@ class SuratController extends Controller
     public function show($id_surat)
     {
       $surat = Surat::findOrFail($id_surat);
+      $jenis = JenisSurat::findOrFail($id_jenis_surat);
       return view('surat.show', compact('surat'));
     }
     /**
