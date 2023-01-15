@@ -3,7 +3,7 @@
 @section('title', 'Data Surat')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Surat Masuk dan Keluar</h1>
+    <!-- <h1 class="m-0 text-dark">Surat Masuk dan Keluar</h1> -->
 @stop
 
 @section('style-css')
@@ -17,7 +17,7 @@ css dan js yang membedakannya ada pada ajax server side di bagian push('javascri
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Data Surat Masuk dan Keluar') }}</div>
+                    <div class="card-header"><h2 class="m-0 text-dark">Surat Masuk dan Keluar</h2></div>
                     <div class="card-body">
                         <a href="{{ route('surats.create') }}" class="btn btn-info btn-sm float-end mb-2">Tambah Data</a>
                         
@@ -31,16 +31,16 @@ css dan js yang membedakannya ada pada ajax server side di bagian push('javascri
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Id</th>
+                                    <!-- <th>Id</th> -->
                                     <th>Nomor Surat</th>
                                     <th>Perihal</th>
                                     <th>Tanggal</th>
                                     <th>Tindak lanjut </th>
-                                    <th>Keterangan </th>
-                                    <th>Id User </th>
-                                    <th>Id Jenis Surat </th>
-                                    <th>Created At </th>
-                                    <th>Updated At </th>
+                                    <!-- <th>Keterangan </th> -->
+                                    <!-- <th>Id User </th>
+                                    <th>Id Jenis Surat </th> -->
+                                    <!-- <th>Created At </th>
+                                    <th>Updated At </th> -->
                                     <th>Opsi</th>
                                 </tr>
                             <tbody></tbody>
@@ -78,9 +78,6 @@ css dan js yang membedakannya ada pada ajax server side di bagian push('javascri
                         searchable: false
                     },
                     {
-                        data: 'id_surat'
-                    },
-                    {
                         data: 'nomor_surat'
                     },
                     {
@@ -92,21 +89,12 @@ css dan js yang membedakannya ada pada ajax server side di bagian push('javascri
                     {
                         data: 'tl'
                     },
-                    {
-                        data: 'keterangan'
-                    },
-                    {
-                        data: 'id_user'
-                    },
-                    {
-                        data: 'id_jenis_surat'
-                    },
-                    {
-                        data: 'created_at'
-                    },
-                    {
-                        data: 'updated_at'
-                    },
+                    // {
+                    //     data: 'created_at'
+                    // },
+                    // {
+                    //     data: 'updated_at'
+                    // },
                     {
                         data: 'action'
                     }

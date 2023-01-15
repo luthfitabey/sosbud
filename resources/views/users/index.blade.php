@@ -3,13 +3,14 @@
 @section('title', 'List User')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">List User</h1>
+    <!-- <h1 class="m-0 text-dark">List User</h1> -->
 @stop
 
 @section('content')
     <div class="row">
         <div class="col-12">
             <div class="card">
+            <div class="card-header"><h2 class="m-0 text-dark">Daftar Pengguna Aktif</h2></div>
                 <div class="card-body">
 
                     <a href="{{route('users.create')}}" class="btn btn-primary mb-2">
