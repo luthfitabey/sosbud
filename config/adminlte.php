@@ -350,7 +350,7 @@ return [
                 ],
                 [
                     'text' => 'Tambah Jenis Surat',
-                    'url'  => '#',
+                    'url'  => 'jenis',
                 ],
                     // 'submenu' => [
                     //     [

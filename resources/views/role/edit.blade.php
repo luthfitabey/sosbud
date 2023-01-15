@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Jenis Surat')
+@section('title', 'Edit User')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Jenis Surat</h1>
+    <h1 class="m-0 text-dark">Edit User</h1>
 @stop
 
 @section('content')
-    <form action="{{route('jenis.update', $jenis)}}" method="post">
+    <form action="{{route('users.update', $user)}}" method="post">
         @method('PUT')
         @csrf
     <div class="row">
@@ -40,7 +40,7 @@
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="{{route('jenis.index')}}" class="btn btn-default">
+                    <a href="{{route('users.index')}}" class="btn btn-default">
                         Batal
                     </a>
                 </div>

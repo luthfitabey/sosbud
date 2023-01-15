@@ -1,14 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Jenis Surat')
+@section('title', 'List User')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Jenis Surat</h1>
+    <h1 class="m-0 text-dark">List User</h1>
 @stop
 
 @section('content')
-    <form action="{{route('jenis.update', $jenis)}}" method="post">
-        @method('PUT')
+    <form action="{{route('users.store')}}" method="post">
         @csrf
     <div class="row">
         <div class="col-12">
@@ -17,13 +16,13 @@
 
                     <div class="form-group">
                         <label for="exampleInputName">Nama</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputName" placeholder="Nama lengkap" name="name" value="{{$user->name ?? old('name')}}">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputName" placeholder="Nama lengkap" name="name" value="{{old('name')}}">
                         @error('name') <span class="text-danger">{{$message}}</span> @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail">Email address</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail" placeholder="Masukkan Email" name="email" value="{{$user->email ?? old('email')}}">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail" placeholder="Masukkan Email" name="email" value="{{old('email')}}">
                         @error('email') <span class="text-danger">{{$message}}</span> @enderror
                     </div>
                     <div class="form-group">
@@ -40,7 +39,7 @@
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="{{route('jenis.index')}}" class="btn btn-default">
+                    <a href="{{route('users.index')}}" class="btn btn-default">
                         Batal
                     </a>
                 </div>

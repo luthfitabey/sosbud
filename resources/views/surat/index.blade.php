@@ -27,14 +27,20 @@ css dan js yang membedakannya ada pada ajax server side di bagian push('javascri
                             </div>
                         @endif
 
-                        <table class="table" id="dataSurats">
+                        <table class="table" id="surat">
                             <thead>
                                 <tr>
                                     <th>No.</th>
+                                    <th>Id</th>
                                     <th>Nomor Surat</th>
                                     <th>Perihal</th>
                                     <th>Tanggal</th>
                                     <th>Tindak lanjut </th>
+                                    <th>Keterangan </th>
+                                    <th>Id User </th>
+                                    <th>Id Jenis Surat </th>
+                                    <th>Created At </th>
+                                    <th>Updated At </th>
                                     <th>Opsi</th>
                                 </tr>
                             <tbody></tbody>
@@ -57,7 +63,7 @@ css dan js yang membedakannya ada pada ajax server side di bagian push('javascri
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
         $(function() {
-            $('#dataSurats').DataTable({
+            $('#surat').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
@@ -65,11 +71,14 @@ css dan js yang membedakannya ada pada ajax server side di bagian push('javascri
                 autoWidth: false,
                 
                 // Route untuk menampilkan data surat
-                ajax: '{{ route('data-surat') }}',
+                ajax: '{{ route('data-surat.data') }}',
                 columns: [{
                         data: 'DT_RowIndex',
                         orderable: false,
                         searchable: false
+                    },
+                    {
+                        data: 'id_surat'
                     },
                     {
                         data: 'nomor_surat'
@@ -82,6 +91,21 @@ css dan js yang membedakannya ada pada ajax server side di bagian push('javascri
                     },
                     {
                         data: 'tl'
+                    },
+                    {
+                        data: 'keterangan'
+                    },
+                    {
+                        data: 'id_user'
+                    },
+                    {
+                        data: 'id_jenis_surat'
+                    },
+                    {
+                        data: 'created_at'
+                    },
+                    {
+                        data: 'updated_at'
                     },
                     {
                         data: 'action'

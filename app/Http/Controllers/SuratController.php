@@ -18,8 +18,8 @@ class SuratController extends Controller
      */
     public function index()
     {
-        $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
         return view('surat.index');
+        $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
     }
 
     /**

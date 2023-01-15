@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\JenisSuratController;
+use App\Http\Controllers\DataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +26,11 @@ Route::middleware(['auth'])->group(function(){
     //edit user
     Route::resource('users', \App\Http\Controllers\UserController::class);
     Route::resource('surats', \App\Http\Controllers\SuratController::class);
-    Route::resource('roles', \App\Http\Controller\RoleController::class);
-    Route::resource('jenis', \App\Http\Controller\JenisSuratController::class);
+    Route::resource('roles', \App\Http\Controllers\RoleController::class);
+    Route::resource('jenis', \App\Http\Controllers\JenisSuratController::class);
+    // Route::get('jenis', '\App\Http\Controller\JenisSuratController@index');
 
-    Route::get('/surats/data',[DataController::class,'Surat'])->name('data-surat');
+    Route::get('/surat/data',[DataController::class,'Surat'])->name('data-surat.data');
     Route::get('/jenis/data', [DataController::class,'Jenis'])->name('data-jenis');
     Route::get('/role/data', [DataController::class,'Role'])->name('data-role');
 });

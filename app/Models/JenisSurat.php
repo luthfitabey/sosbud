@@ -9,5 +9,6 @@ class JenisSurat extends Model
 {
     use HasFactory;
     protected $table = 'jenis-surat';
-    protected $primaryKey = 'id_jenis_surat';
+    protected $primarykey = 'id_jenis_surat';
+    protected $fillable = ['id_jenis_surat'];
 }

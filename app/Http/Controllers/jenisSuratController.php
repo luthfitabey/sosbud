@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JenisSurat;
 use Illuminate\Http\Request;
 
-class jenisSuratController extends Controller
+class JenisSuratController extends Controller
 {
     /**
      * Display a listing of the resource.
