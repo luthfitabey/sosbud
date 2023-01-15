@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\Models\Surat;
 use App\Models\JenisSurat;
 use App\Models\User;
@@ -47,6 +48,7 @@ class SuratController extends Controller
     public function store(Request $request)
     {
         $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
+        $idUser = Auth::user()->id;
         $this->validate($request, [
 
         ]);
@@ -55,9 +57,12 @@ class SuratController extends Controller
             $file = $request->file('image');
             $uploadFile = time() . '_' . $file->getClientOriginalName();
             $file->move('uploads/imgCover/', $uploadFile);
-            $surat->image = $uploadFile;
+            $surat->keterangan = $uploadFile;
         }
-        $surat->nomor = $request->input('nomor_surat');
+        $surat->id_user = 1;
+        $surat->id_jenis_surat = $request->input('id_jenis_surat');
+        
+        $surat->nomor_surat = $request->input('nomor_surat');
         $surat->perihal = $request->input('perihal');
         $surat->tanggal = $request->input('tanggal');
         $surat->tl = $request->input('tl');

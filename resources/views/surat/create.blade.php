@@ -3,7 +3,7 @@
 @section('title', 'Tambah Surat')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Tambah Surat</h1>
+    <!-- <h1 class="m-0 text-dark">Tambah Surat</h1> -->
 @stop
 
 @section('style-css')
@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">Tambah Data Surat Masuk dan Keluar</div>
+                    <div class="card-header"><h2 class="m-0 text-dark">Tambah Surat</h2></div>
                     <div class="card-body">
                         {{-- action form yang mengarah ke route surat.store untuk proses penyimpanan data --}}
                         <form action="{{ route('surats.store') }}" method="post" enctype="multipart/form-data">
@@ -44,7 +44,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Tanggal</label>
-                                <input type="text" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" id="">
+                                <input type="datetime-local" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" id="">
                                 @error('tanggal')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -59,8 +59,8 @@
                             <div class="form-group mb-3">
                                 <label for="">Keterangan</label><br>
                                 <img id="previewImage" class="mb-2" src="#" width="100%" alt="">
-                                <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
-                                    id="image">
+                                <input type="file" name="keterangan" class="form-control @error('image') is-invalid @enderror"
+                                    id="keterangan">
                                 @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
