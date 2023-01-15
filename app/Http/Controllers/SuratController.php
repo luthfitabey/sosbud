@@ -19,7 +19,7 @@ class SuratController extends Controller
     public function index()
     {
         return view('surat.index');
-        $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
+
     }
 
     /**
@@ -29,11 +29,13 @@ class SuratController extends Controller
      */
     public function create()
     {
-        $surat = Surat::get()->first();
-        $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
-        return view('surat.create', [
-            'surat' => $surat,
-        ]);
+        // $surat = Surat::get()->first();
+        // $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
+        // return view('surat.create', [
+        //     'surat' => $surat,
+        // ]);
+        $jenis = JenisSurat::all();
+        return view('surat.create', compact('jenis'));
     }
 
     /**

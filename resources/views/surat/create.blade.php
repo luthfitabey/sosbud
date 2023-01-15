@@ -21,17 +21,12 @@
                         <form action="{{ route('surats.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group mb-3">
-                            <select name="id_jenis_surat" class="form-control" style="width: 175px;">
-                                <option value="" disabled selected>- - - - Pilih Jenis Surat - - - -</option>
-                                @foreach($jenis as $j)
-                                <option value="{{ $s['jenis_surat'] }}">{{ $j['jenis_surat'] }}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('id_jenis_surat'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('id_jenis_surat') }}</strong>
-                                </span>
-                            @endif
+                                <label for="jenis-option">Jenis Surat</label>
+                                <select class="form-control" id="jenis-option" name="id_jenis_surat">
+                                    @foreach ($jenis as $jenis)
+                                        <option value="{{ $jenis->id_jenis_surat }}"> {{ $jenis->jenis_surat}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="">Nomor Surat</label>
@@ -48,7 +43,7 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="">tanggal</label>
+                                <label for="">Tanggal</label>
                                 <input type="text" name="tanggal" class="form-control @error('tanggal') is-invalid @enderror" id="">
                                 @error('tanggal')
                                     <div class="invalid-feedback">{{ $message }}</div>
