@@ -13,8 +13,8 @@
     dan kita juga melakukan passing parameter mke route tersebut , 
     method post kita ubah menjadi PUT 
     
-    dan menambahkan value pada tiap-tiap tag input dengan varaibel $space lalu di ikuti nama field 
-    dari tabel space
+    dan menambahkan value pada tiap-tiap tag input dengan varaibel $surat lalu di ikuti nama field 
+    dari tabel surat
     --}}
 
     @section('content')

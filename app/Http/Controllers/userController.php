@@ -38,7 +38,6 @@ public function store(Request $request)
         'name', 'email', 'password', 'id_role'
     ]);
     $array['password'] = bcrypt($array['password']);
-    $array['role'] = $request->input('id_role');
     $user = User::create($array);
     return redirect()->route('users.index')
         ->with('success_message', 'Berhasil menambah user baru');
