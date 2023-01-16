@@ -60,7 +60,7 @@
                                 <label for="">Keterangan</label><br>
                                 <img id="previewImage" class="mb-2" src="#" width="100%" alt="">
                                 <input type="file" name="keterangan" class="form-control @error('image') is-invalid @enderror"
-                                    id="keterangan">
+                                    id="image">
                                 @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
