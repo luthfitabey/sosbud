@@ -56,15 +56,14 @@ class SuratController extends Controller
             // 'keterangan' => 'image|mimes:png,jpg,jpeg',
         ]);
         $surat = new Surat();
-        if ($request->hasFile('image')){
-            $file = $request->file('image');
+        if ($request->hasFile('keterangan')){
+            $file = $request->file('keterangan');
             $uploadFile = time() . '_' . $file->getClientOriginalName();
             $file->move('uploads/imgCover/', $uploadFile);
             $surat->keterangan = $uploadFile;
         }
         $surat->id_user = auth()->id();
         $surat->id_jenis_surat = $request->input('id_jenis_surat');
-        
         $surat->nomor_surat = $request->input('nomor_surat');
         $surat->perihal = $request->input('perihal');
         $surat->tanggal = $request->input('tanggal');
@@ -128,14 +127,14 @@ class SuratController extends Controller
             // 'keterangan' => 'image|mimes:png,jpg,jpeg'
         ]);
         $surat = Surat::findOrFail($surat->id_surat);
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('keterangan')) {
             
             if (File::exists("uploads/imgCover/" . $surat->keterangan)) {
                 File::delete("uploads/imgCover/" . $surat->keterangan);
             }
             
-            $file = $request->file("image");
-            //$uploadFile = StoreImage::replace($space->image,$file->getRealPath(),$file->getClientOriginalName());
+            $file = $request->file("keterangan");
+            //$uploadFile = StoreImage::replace($surat->image,$file->getRealPath(),$file->getClientOriginalName());
             $uploadFile = time() . '_' . $file->getClientOriginalName();
             $file->move('uploads/imgCover/', $uploadFile);
             $surat->keterangan = $uploadFile;
