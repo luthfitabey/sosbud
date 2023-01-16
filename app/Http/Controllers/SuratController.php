@@ -20,7 +20,6 @@ class SuratController extends Controller
     public function index()
     {
         return view('surat.index');
-
     }
 
     /**
@@ -49,13 +48,12 @@ class SuratController extends Controller
     {
         $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
         $this->validate($request, [
-            'id_surat' => 'required',
-            'nomor_surat' => 'required',
-            'perihal' => 'required',
-            'tanggal' => 'required',
-            'tanggal' => 'required',
-            'tl' => 'image|mimes:png,jpg,jpeg',
-            'keterangan' => 'required'
+            // 'id_surat' => 'required',
+            // 'nomor_surat' => 'required',
+            // 'perihal' => 'required',
+            // 'tanggal' => 'required',
+            // 'tl' => 'required',
+            // 'keterangan' => 'image|mimes:png,jpg,jpeg',
         ]);
         $surat = new Surat();
         if ($request->hasFile('image')){
@@ -99,14 +97,15 @@ class SuratController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Surat $surat)
+    public function edit(surat $surat)
     {
         $jenis = JenisSurat::all();
-        return view('surat.edit', compact('jenis'));
         $surat = Surat::findOrFail($surat->id_surat);
+        // return view('surat.edit', compact('jenis'));
         return view('surat.edit', [
-            'surat' => $surat
-        ]);
+            'surat' => $surat],
+            compact('jenis')
+        );
     }
 
     /**
@@ -118,20 +117,16 @@ class SuratController extends Controller
      */
     public function update(Request $request, Surat $surat)
     {
-        // Menjalankan validasi
         $this->validate($request, [
             'id_surat' => 'required',
+            'id_user' => 'required',
+            'id_jenis_surat' => 'required',
             'nomor_surat' => 'required',
             'perihal' => 'required',
-            'tanggal' => 'required',
             'tanggal' => 'required',
             'tl' => 'image|mimes:png,jpg,jpeg',
             'keterangan' => 'required'
         ]);
-
-        // Jika data yang akan diganti ada pada tabel space
-        // cek terlebih dahulu apakah akan mengganti gambar atau tidak
-        // jika gambar diganti hapus terlebuh dahulu gambar lama
         $surat = Surat::findOrFail($surat->id_surat);
         if ($request->hasFile('image')) {
             
