@@ -48,9 +48,14 @@ class SuratController extends Controller
     public function store(Request $request)
     {
         $jenis = JenisSurat::select('jenis_surat')->get()->toArray();
-        $idUser = Auth::user()->id;
         $this->validate($request, [
-
+            'id_surat' => 'required',
+            'nomor_surat' => 'required',
+            'perihal' => 'required',
+            'tanggal' => 'required',
+            'tanggal' => 'required',
+            'tl' => 'image|mimes:png,jpg,jpeg',
+            'keterangan' => 'required'
         ]);
         $surat = new Surat();
         if ($request->hasFile('image')){
@@ -59,7 +64,7 @@ class SuratController extends Controller
             $file->move('uploads/imgCover/', $uploadFile);
             $surat->keterangan = $uploadFile;
         }
-        $surat->id_user = 1;
+        $surat->id_user = auth()->id();
         $surat->id_jenis_surat = $request->input('id_jenis_surat');
         
         $surat->nomor_surat = $request->input('nomor_surat');
@@ -70,9 +75,9 @@ class SuratController extends Controller
         $surat->save();
 
         if($surat){
-            return redirect()->route(surat.index)->with('success', 'Data berhasil disimpan');
+            return redirect()->route('surats.index')->with('success', 'Data berhasil disimpan');
         }else{
-            return redirect()->route(surat.index)->with('error', 'Data gagal disimpan');
+            return redirect()->route('surats.index')->with('error', 'Data gagal disimpan');
         }
     }
 
@@ -94,9 +99,11 @@ class SuratController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Surat $surat)
     {
-        $surat = Surat::findOrFail($surat->id);
+        $jenis = JenisSurat::all();
+        return view('surat.edit', compact('jenis'));
+        $surat = Surat::findOrFail($surat->id_surat);
         return view('surat.edit', [
             'surat' => $surat
         ]);
@@ -109,9 +116,49 @@ class SuratController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Surat $surat)
     {
-        //
+        // Menjalankan validasi
+        $this->validate($request, [
+            'id_surat' => 'required',
+            'nomor_surat' => 'required',
+            'perihal' => 'required',
+            'tanggal' => 'required',
+            'tanggal' => 'required',
+            'tl' => 'image|mimes:png,jpg,jpeg',
+            'keterangan' => 'required'
+        ]);
+
+        // Jika data yang akan diganti ada pada tabel space
+        // cek terlebih dahulu apakah akan mengganti gambar atau tidak
+        // jika gambar diganti hapus terlebuh dahulu gambar lama
+        $surat = Surat::findOrFail($surat->id_surat);
+        if ($request->hasFile('image')) {
+            
+            if (File::exists("uploads/imgCover/" . $surat->keterangan)) {
+                File::delete("uploads/imgCover/" . $surat->keterangan);
+            }
+            
+            $file = $request->file("image");
+            //$uploadFile = StoreImage::replace($space->image,$file->getRealPath(),$file->getClientOriginalName());
+            $uploadFile = time() . '_' . $file->getClientOriginalName();
+            $file->move('uploads/imgCover/', $uploadFile);
+            $surat->keterangan = $uploadFile;
+        }
+
+        // Lakukan Proses update data ke tabel space
+        $surat->update([
+            'nomor_surat' => $request->nomor_surat,
+            'perihal' => $request->perihal,
+            'tanggal' => $request->tanggal,
+            'tl' => $request->tl
+        ]);
+        // redirect ke halaman index space
+        if ($surat) {
+            return redirect()->route('surats.index')->with('success', 'Data berhasil diupdate');
+        } else {
+            return redirect()->route('surats.index')->with('error', 'Data gagal diupdate');
+        }
     }
 
     /**
@@ -123,10 +170,10 @@ class SuratController extends Controller
     public function destroy($id)
     {
         $surat = Surat::findOrFail($id);
-        if(File::exists("uploads/imgCover/" . $Surat->keterangan)){
+        if(File::exists("uploads/imgCover/" . $surat->keterangan)){
             File::delete('uploads/imgCover/' . $surat->keterangan); 
         }
         $surat->delete();
-        return redirect()->route('surat.index');
+        return redirect()->route('surats.index');
     }
 }
