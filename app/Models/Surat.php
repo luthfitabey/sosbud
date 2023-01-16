@@ -10,6 +10,7 @@ class Surat extends Model
     use HasFactory;
     protected $table = 'surat';
     protected $primaryKey = 'id_surat';
+    protected $fillable = ['nomor_surat'];
 
     public function jenis()
     {

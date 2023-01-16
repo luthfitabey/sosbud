@@ -13,7 +13,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-
+                    <div class="form-group mb-3">
+                        <label for="role-option">Role</label>
+                        <select class="form-control" id="role-option" name="id_role">
+                            @foreach ($role as $role)
+                                <option value="{{ $role->id_role }}"> {{ $role->nama_role}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputName">Nama</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputName" placeholder="Nama lengkap" name="name" value="{{old('name')}}">

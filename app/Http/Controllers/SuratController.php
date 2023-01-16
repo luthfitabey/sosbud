@@ -118,14 +118,14 @@ class SuratController extends Controller
     public function update(Request $request, Surat $surat)
     {
         $this->validate($request, [
-            'id_surat' => 'required',
-            'id_user' => 'required',
-            'id_jenis_surat' => 'required',
-            'nomor_surat' => 'required',
-            'perihal' => 'required',
-            'tanggal' => 'required',
-            'tl' => 'image|mimes:png,jpg,jpeg',
-            'keterangan' => 'required'
+            // 'id_surat' => 'required',
+            // 'id_user' => 'required',
+            // 'id_jenis_surat' => 'required',
+            // 'nomor_surat' => 'required',
+            // 'perihal' => 'required',
+            // 'tanggal' => 'required',
+            // 'tl' => 'required',
+            // 'keterangan' => 'image|mimes:png,jpg,jpeg'
         ]);
         $surat = Surat::findOrFail($surat->id_surat);
         if ($request->hasFile('image')) {
@@ -141,14 +141,15 @@ class SuratController extends Controller
             $surat->keterangan = $uploadFile;
         }
 
-        // Lakukan Proses update data ke tabel space
+        // Lakukan Proses update data ke tabel surat
         $surat->update([
             'nomor_surat' => $request->nomor_surat,
             'perihal' => $request->perihal,
             'tanggal' => $request->tanggal,
-            'tl' => $request->tl
+            'tl' => $request->tl,
+            'keterangan' => $request->keterangan,
         ]);
-        // redirect ke halaman index space
+        // redirect ke halaman index surat
         if ($surat) {
             return redirect()->route('surats.index')->with('success', 'Data berhasil diupdate');
         } else {

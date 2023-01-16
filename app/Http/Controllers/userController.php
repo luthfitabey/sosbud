@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class userController extends Controller
@@ -21,20 +22,23 @@ class userController extends Controller
 
 public function create(Request $request)
 {
-    return view('users.create');
+    $role = Role::all();
+    return view('users.create', compact('role'));
 }
 
 public function store(Request $request)
 {
+    $role = Role::select('nama_role')->get()->toArray();
     $request->validate([
         'name' => 'required',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|confirmed'
     ]);
     $array = $request->only([
-        'name', 'email', 'password'
+        'name', 'email', 'password', 'id_role'
     ]);
     $array['password'] = bcrypt($array['password']);
+    $array['role'] = $request->input('id_role');
     $user = User::create($array);
     return redirect()->route('users.index')
         ->with('success_message', 'Berhasil menambah user baru');
