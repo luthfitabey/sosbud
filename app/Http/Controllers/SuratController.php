@@ -56,8 +56,8 @@ class SuratController extends Controller
             // 'keterangan' => 'image|mimes:png,jpg,jpeg',
         ]);
         $surat = new Surat();
-        if ($request->hasFile('keterangan')){
-            $file = $request->file('keterangan');
+        if ($request->hasFile('image')){
+            $file = $request->file('image');
             $uploadFile = time() . '_' . $file->getClientOriginalName();
             $file->move('uploads/imgCover/', $uploadFile);
             $surat->keterangan = $uploadFile;
@@ -127,13 +127,13 @@ class SuratController extends Controller
             // 'keterangan' => 'image|mimes:png,jpg,jpeg'
         ]);
         $surat = Surat::findOrFail($surat->id_surat);
-        if ($request->hasFile('keterangan')) {
+        if ($request->hasFile('image')) {
             
             if (File::exists("uploads/imgCover/" . $surat->keterangan)) {
                 File::delete("uploads/imgCover/" . $surat->keterangan);
             }
             
-            $file = $request->file("keterangan");
+            $file = $request->file("image");
             //$uploadFile = StoreImage::replace($surat->image,$file->getRealPath(),$file->getClientOriginalName());
             $uploadFile = time() . '_' . $file->getClientOriginalName();
             $file->move('uploads/imgCover/', $uploadFile);

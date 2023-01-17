@@ -18,11 +18,11 @@ class Surat extends Model
     }
     public function getImage()
     {
-        if (substr($this->keterangan, 0, 5) == "https") {
-            return $this->keterangan;
+        if (substr($this->image, 0, 5) == "https") {
+            return $this->image;
         }
 
-        if ($this->keterangan) {
+        if ($this->image) {
             return asset('/uploads/imgCover/' . $this->image);
         }
 

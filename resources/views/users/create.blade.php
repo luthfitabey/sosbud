@@ -3,7 +3,7 @@
 @section('title', 'List User')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">List User</h1>
+    <!-- <h1 class="m-0 text-dark">List User</h1> -->
 @stop
 
 @section('content')
@@ -12,6 +12,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+            <div class="card-header"><h2 class="m-0 text-dark">Tambah Pengguna Aktif</h2></div>
                 <div class="card-body">
                     <div class="form-group mb-3">
                         <label for="role-option">Role</label>

@@ -13,8 +13,8 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+            <div class="card-header"><h2 class="m-0 text-dark">Edit Pengguna Aktif</h2></div>
                 <div class="card-body">
-
                     <div class="form-group">
                         <label for="exampleInputName">Nama</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputName" placeholder="Nama lengkap" name="name" value="{{$user->name ?? old('name')}}">
