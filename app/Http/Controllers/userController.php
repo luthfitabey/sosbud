@@ -50,15 +50,18 @@ public function store(Request $request)
 public function edit($id)
 {
     $user = User::find($id);
+    $role = Role::all();
     if (!$user) return redirect()->route('admins.index')
         ->with('error_message', 'User dengan id'.$id.' tidak ditemukan');
     return view('users.edit', [
-        'user' => $user
-    ]);    
+        'user' => $user],
+        compact('role')
+    );
 }
 
 public function update(Request $request, $id)
 {
+    $role = Role::select('nama_role')->get()->toArray();
     $request->validate([
         'name' => 'required',
         'email' => 'required|email|unique:users,email, '.$id,

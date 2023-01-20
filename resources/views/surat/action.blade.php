@@ -3,8 +3,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-{{-- isi dari file view action.surats sama dengan file view action.centrepoint --}}
-
 <script>
     $('button#delete').on('click',function(e){
         e.preventDefault();

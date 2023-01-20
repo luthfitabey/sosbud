@@ -9,14 +9,6 @@
 @section('style-css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    {{-- Untuk form edit sama dengan form create yang membedakannya hanya route action yaitu update,
-    dan kita juga melakukan passing parameter mke route tersebut , 
-    method post kita ubah menjadi PUT 
-    
-    dan menambahkan value pada tiap-tiap tag input dengan varaibel $space lalu di ikuti nama field 
-    dari tabel space
-    --}}
-
     @section('content')
     <!-- <div class="container"> -->
         <div class="row">
