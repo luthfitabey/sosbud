@@ -47,9 +47,9 @@ public function store(Request $request)
 // {
 // }
 
-public function edit($id)
+public function edit(User $user)
 {
-    $user = User::find($id);
+    $user = User::findOrFail($user->id_user);
     $role = Role::all();
     if (!$user) return redirect()->route('admins.index')
         ->with('error_message', 'User dengan id'.$id.' tidak ditemukan');
@@ -59,15 +59,15 @@ public function edit($id)
     );
 }
 
-public function update(Request $request, $id)
+public function update(Request $request, User $user)
 {
     $role = Role::select('nama_role')->get()->toArray();
     $request->validate([
         'name' => 'required',
-        'email' => 'required|email|unique:users,email, '.$id,
+        'email' => 'required|email|unique:users,email, '.$user,
         'password' => 'sometimes|nullable|confirmed'
     ]);
-    $user = User::find($id);
+    $user = User::findOrFail($user->id_user);
     $user->name = $request->name;
     $user->email = $request->email;
     if ($request->password) $user->password = bcrypt($request->password);
@@ -75,6 +75,7 @@ public function update(Request $request, $id)
     return redirect()->route('users.index')
         ->with('success_message', 'Berhasil mengubah user');
 }
+
 public function destroy(Request $request, $id)
 {
     $user = User::find($id);
